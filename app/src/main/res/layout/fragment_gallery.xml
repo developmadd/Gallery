@@ -1,0 +1,74 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UserGallery.Gallery.GalleryFragment">
+
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/TB_Gallery"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mi Galería"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Ok(0)"
+            android:layout_gravity="end"
+            android:textAllCaps="false"
+            android:background="@null"
+            android:textColor="#AA0000"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:id="@+id/BTN_Gallery_Accept" />
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/TB_Gallery"
+        android:id="@+id/CTNR_Gallery"/>
+
+    <ProgressBar
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/PB_Gallery"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/TV_Gallery_Message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TV_Gallery_Message"
+        android:layout_centerInParent="true"
+        android:text="Conceder permiso"
+        android:textAllCaps="false"
+        android:visibility="gone"
+        android:id="@+id/BTN_Gallery_Permission"/>
+
+
+
+</RelativeLayout>

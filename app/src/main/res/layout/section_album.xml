@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CTNR_Section_Album"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp">
+
+
+    <ImageView
+        android:id="@+id/IV_Section_Album"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/TV_Section_Album"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/TV_Section_Album"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/image_gradient"
+        android:gravity="start|center"
+        android:paddingStart="30dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_folder"
+        android:layout_marginStart="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/TV_Section_Album"
+        app:layout_constraintStart_toStartOf="@+id/TV_Section_Album"
+        app:layout_constraintTop_toBottomOf="@+id/TV_Section_Album" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Edition.PictureEditor.EditorPictureFragment">
+
+
+
+
+
+        <com.fenchtose.nocropper.CropperView
+            android:background="#ff282828"
+            android:id="@+id/CRV_Editor_Picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:nocropper__grid_opacity="0.8"
+            app:nocropper__grid_thickness="0.8dp"
+            app:nocropper__padding_color="@color/colorBlackTransparent"
+            app:nocropper__grid_color="@color/colorBlackTransparent" />
+
+
+
+        <ImageButton
+            android:id="@+id/BTN_Editor_Delete"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:layout_margin="16dp"
+            android:background="@color/colorBlackTransparent"
+            android:src="@drawable/ic_delete_black_24dp"/>
+
+        <ImageButton
+            android:id="@+id/BTN_Editor_Rotate"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:layout_margin="16dp"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorBlackTransparent"
+            android:src="@drawable/ic_rotate_right_black_24dp"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:id="@+id/PB_Editor"/>
+
+
+    <Button
+        android:id="@+id/BTN_Editor_Edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Listo"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:background="@color/colorBlackTransparent"
+        android:layout_below="@id/CRV_Editor_Picture"/>
+
+
+
+</RelativeLayout>
+
+
+
+

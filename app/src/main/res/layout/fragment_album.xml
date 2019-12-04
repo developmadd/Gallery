@@ -1,0 +1,65 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UserGallery.Album.AlbumFragment">
+
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/TB_Album"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:id="@+id/TV_Album_Title"
+            android:layout_gravity="center" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Ok(0)"
+            android:layout_gravity="end"
+            android:textAllCaps="false"
+            android:background="@null"
+            android:textColor="#AA0000"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:id="@+id/BTN_Album_Accept" />
+
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/TB_Album"
+        android:id="@+id/CTNR_Album"/>
+
+    <ProgressBar
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/PB_Album"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/TV_Album_Message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+
+
+
+</RelativeLayout>
