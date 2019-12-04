@@ -46,10 +46,10 @@ public class EditorPicturePresenter implements EditorPictureContract.Presenter {
     public void finishEdition() {
         if( view != null ) {
 
-            int permissionCheckRead = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE);
+            int permissionCheckRead = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
             if (permissionCheckRead != PackageManager.PERMISSION_GRANTED) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    view.getViewFragment().requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 10);
+                    view.getViewFragment().requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10);
                 }
             } else {
                 executePictureEdition();
