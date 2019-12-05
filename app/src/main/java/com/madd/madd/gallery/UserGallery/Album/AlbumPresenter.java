@@ -58,12 +58,12 @@ public class AlbumPresenter implements AlbumContract.Presenter {
 
 
     @Override
-    public void selectPicture(String path, int position) {
+    public void selectPicture(String selectedPath, int selectedPosition) {
         if( view != null ){
             if( view.getMultipleSelection() ){
-                multipleSelection(path, position);
+                multipleSelection(selectedPath, selectedPosition);
             } else {
-                singleSelection(path, position);
+                singleSelection(selectedPath, selectedPosition);
             }
         }
     }

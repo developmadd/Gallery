@@ -1,6 +1,5 @@
 package com.madd.madd.gallery.UserGallery.Gallery;
 
-import android.content.ContentResolver;
 
 import com.madd.madd.gallery.UserGallery.Album.AlbumContract;
 import com.madd.madd.gallery.UserGallery.Album.AlbumPresenter;
@@ -8,13 +7,16 @@ import com.madd.madd.gallery.UserGallery.Album.AlbumPresenter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.TestCase.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,6 +38,7 @@ public class AlbumPresenterTest {
 
 
         presenter = new AlbumPresenter(mockedModel);
+        presenter.setView(mockedView);
     }
 
     /*
@@ -43,89 +46,141 @@ public class AlbumPresenterTest {
         Tests:
         1: Show empty list
         2: Show not empty list
-        3: Select picture with single selection
+        3: Select picture with single selection and picture pre selected
         4: Un-select picture with single selection
-        5: Select picture with multiple selection
+        5: Select picture with multiple selection and picture pre selected
         6: Un-select picture with multiple selection
 
      */
 
-    // Show picture list
-    /*@Test
-    public void shouldShowEmptyListMessageWhenAlbumDoesNotExists() {
-        presenter.requestPictureList("this_album_does_not_exists");
+
+    @Test
+    public void showEmptyAlbum() {
+        doAnswer(invocation -> {
+            ((AlbumContract.Model.PictureListRequest)invocation.getArguments()[1]).onError("");
+            return null;
+        }).when(mockedModel).getPictureList(eq("album_name"),any(AlbumContract.Model.PictureListRequest.class));
+
+        presenter.requestPictureList("album_name");
         verify(mockedView).showEmptyListError();
     }
-    @Test
-    public void shouldShowPictureListFromExistentAlbum() {
-        presenter.requestPictureList("this_album_exists");
-        List<String> imageList = new ArrayList<>();
-        imageList.add("0");
-        imageList.add("1");
-        imageList.add("2");
-        verify(view).showPictureList(new ArrayList<>(),imageList);
-    }
-
-
-    // Single Selection
-    @Test
-    public void shouldRemoveSelectedPictureWhenItIsSelectedAgain(){
-
-        List<String> selectedList = new ArrayList<>();
-        selectedList.add("0");
-        when(view.getSelectedPictureList()).thenReturn(selectedList);
-        when(view.getMultipleSelection()).thenReturn(false);
-
-        presenter.selectPicture("0",0);
-        verify(view).showSelectedPictureCounter(0);
-        assertEquals(0,view.getSelectedPictureList().size());
-    }
 
     @Test
-    public void shouldReplaceSelectedPictureWhenANewOneIsSelected(){
+    public void showNotEmptyAlbum() {
+        List<String> selectedPictureList = new ArrayList<>();
+        List<String> albumPictureList = new ArrayList<>();
+        doAnswer(invocation -> {
+            ((AlbumContract.Model.PictureListRequest)invocation.getArguments()[1]).onSuccess(albumPictureList);
+            return null;
+        }).when(mockedModel).getPictureList(eq("album_name"),any(AlbumContract.Model.PictureListRequest.class));
 
-        List<String> selectedList = new ArrayList<>();
-        selectedList.add("0");
-        when(view.getSelectedPictureList()).thenReturn(selectedList);
-        when(view.getMultipleSelection()).thenReturn(false);
+        presenter.requestPictureList("album_name");
+        verify(mockedView).showPictureList(selectedPictureList,albumPictureList);
 
-        presenter.selectPicture("2",0);
-        verify(view).showSelectedPictureCounter(1);
-        assertEquals(1,view.getSelectedPictureList().size());
     }
 
 
 
-    // Multiple Selection
     @Test
-    public void shouldRemovePictureFromSelectedPictureList(){
+    public void selectPictureWithSingleSelectionAndPicturePreSelected(){
 
-        List<String> selectedList = new ArrayList<>();
-        selectedList.add("0");
-        selectedList.add("1");
-        selectedList.add("2");
-        when(view.getSelectedPictureList()).thenReturn(selectedList);
-        when(view.getMultipleSelection()).thenReturn(true);
+        List<String> albumPictureList = new ArrayList<>();
+        albumPictureList.add("1");
+        albumPictureList.add("2");
+        albumPictureList.add("3");
 
-        presenter.selectPicture("2",0);
-        verify(view).showSelectedPictureCounter(2);
-        assertEquals(2,view.getSelectedPictureList().size());
+        int selectedIndexByUser = 1;
+        int preSelectedIndexByUser = 0;
+
+        List<String> selectedPictureList = new ArrayList<>();
+        selectedPictureList.add(albumPictureList.get(preSelectedIndexByUser));
+
+        when(mockedView.getMultipleSelection()).thenReturn(false);
+        when(mockedView.getSelectedPictureList()).thenReturn(selectedPictureList);
+        when(mockedView.getAlbumPictureList()).thenReturn(albumPictureList);
+
+        presenter.selectPicture(albumPictureList.get(selectedIndexByUser),selectedIndexByUser);
+        verify(mockedView).refreshPictureAtPosition(preSelectedIndexByUser);
+        verify(mockedView).showSelectedPictureCounter(1);
+        verify(mockedView).refreshPictureAtPosition(selectedIndexByUser);
 
     }
 
     @Test
-    public void shouldAddNewPictureToSelectedPictureList(){
+    public void unSelectPictureWithSingleSelection(){
 
-        List<String> selectedList = new ArrayList<>();
-        selectedList.add("0");
-        selectedList.add("1");
-        selectedList.add("2");
-        when(view.getSelectedPictureList()).thenReturn(selectedList);
-        when(view.getMultipleSelection()).thenReturn(true);
+        List<String> albumPictureList = new ArrayList<>();
+        albumPictureList.add("1");
+        albumPictureList.add("2");
+        albumPictureList.add("3");
 
-        presenter.selectPicture("3",0);
-        verify(view).showSelectedPictureCounter(4);
-        assertEquals(4,view.getSelectedPictureList().size());
+        int selectedIndexByUser = 0;
+        int preSelectedIndexByUser = 0;
 
-    }*/
+        List<String> selectedPictureList = new ArrayList<>();
+        selectedPictureList.add(albumPictureList.get(preSelectedIndexByUser));
+
+        when(mockedView.getMultipleSelection()).thenReturn(false);
+        when(mockedView.getSelectedPictureList()).thenReturn(selectedPictureList);
+        when(mockedView.getAlbumPictureList()).thenReturn(albumPictureList);
+
+        presenter.selectPicture(albumPictureList.get(selectedIndexByUser),selectedIndexByUser);
+        verify(mockedView).showSelectedPictureCounter(0);
+        verify(mockedView).refreshPictureAtPosition(selectedIndexByUser);
+
+    }
+
+
+
+    @Test
+    public void selectPictureWithMultipleSelectionAndPicturePreSelected(){
+
+        List<String> albumPictureList = new ArrayList<>();
+        albumPictureList.add("1");
+        albumPictureList.add("2");
+        albumPictureList.add("3");
+
+        int selectedIndexByUser = 1;
+        int preSelectedIndexByUser = 0;
+
+        List<String> selectedPictureList = new ArrayList<>();
+        selectedPictureList.add(albumPictureList.get(preSelectedIndexByUser));
+        int initialSelectedPictures = selectedPictureList.size();
+
+        when(mockedView.getMultipleSelection()).thenReturn(true);
+        when(mockedView.getSelectedPictureList()).thenReturn(selectedPictureList);
+
+        presenter.selectPicture(albumPictureList.get(selectedIndexByUser),selectedIndexByUser);
+
+        verify(mockedView).showSelectedPictureCounter(initialSelectedPictures + 1);
+        assertEquals(mockedView.getSelectedPictureList().size(),initialSelectedPictures + 1);
+        verify(mockedView).refreshPictureAtPosition(selectedIndexByUser);
+
+    }
+
+    @Test
+    public void unSelectPictureWithMultipleSelectionAndPicturePreSelected(){
+
+        List<String> albumPictureList = new ArrayList<>();
+        albumPictureList.add("1");
+        albumPictureList.add("2");
+        albumPictureList.add("3");
+
+        int selectedIndexByUser = 0;
+        int preSelectedIndexByUser = 0;
+
+        List<String> selectedPictureList = new ArrayList<>();
+        selectedPictureList.add(albumPictureList.get(preSelectedIndexByUser));
+        int initialSelectedPictures = selectedPictureList.size();
+
+        when(mockedView.getMultipleSelection()).thenReturn(true);
+        when(mockedView.getSelectedPictureList()).thenReturn(selectedPictureList);
+
+        presenter.selectPicture(albumPictureList.get(selectedIndexByUser),selectedIndexByUser);
+
+        verify(mockedView).showSelectedPictureCounter(initialSelectedPictures - 1);
+        assertEquals(mockedView.getSelectedPictureList().size(),initialSelectedPictures - 1);
+        verify(mockedView).refreshPictureAtPosition(selectedIndexByUser);
+
+    }
 }

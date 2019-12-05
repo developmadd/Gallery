@@ -8,7 +8,7 @@ public class EditorPresenter implements EditorContract.Presenter {
     private EditorContract.View view;
 
 
-    EditorPresenter( ) {
+    public EditorPresenter( ) {
 
     }
 
@@ -26,12 +26,12 @@ public class EditorPresenter implements EditorContract.Presenter {
     }
 
     @Override
-    public void selectPicture(int position) {
+    public void selectPicture(int selectPictureIndex) {
         if( view != null ) {
             List<String> pictureList = view.getPictureList();
-            view.setSelectedPicture(position);
+            view.setSelectedPicture(selectPictureIndex);
             if (!pictureList.isEmpty()) {
-                view.loadPicture(pictureList.get(position));
+                view.loadPicture(pictureList.get(selectPictureIndex));
                 view.showEditionButton();
             } else {
                 view.returnSelectedPictureList();
@@ -57,9 +57,9 @@ public class EditorPresenter implements EditorContract.Presenter {
 
     @Override
     public void dragPicture(int fromPosition, int toPosition) {
-        List<String> imageList = view.getPictureList();
-        if (toPosition < imageList.size()){
-            Collections.swap(imageList, fromPosition, toPosition);
+        List<String> pictureList = view.getPictureList();
+        if (toPosition < pictureList.size()){
+            Collections.swap(pictureList, fromPosition, toPosition);
             view.refreshPictures(fromPosition, toPosition);
         }
     }
