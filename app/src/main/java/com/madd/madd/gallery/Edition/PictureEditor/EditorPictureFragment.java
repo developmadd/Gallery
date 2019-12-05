@@ -69,6 +69,9 @@ public class EditorPictureFragment extends Fragment implements EditorPictureCont
 
         loadView();
 
+
+        presenter.setView(this);
+        presenter.loadPicture();
         return v;
     }
 
@@ -77,7 +80,6 @@ public class EditorPictureFragment extends Fragment implements EditorPictureCont
     public void onResume() {
         super.onResume();
         presenter.setView(this);
-        presenter.loadPicture();
     }
 
     private void loadView(){
@@ -124,7 +126,8 @@ public class EditorPictureFragment extends Fragment implements EditorPictureCont
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        presenter.onPermissionsResult(grantResults);
+        boolean grantedPermissions = (grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED);
+        presenter.setWritePermissions(grantedPermissions);
     }
 
 
@@ -133,6 +136,11 @@ public class EditorPictureFragment extends Fragment implements EditorPictureCont
     public void loadPictureBitmap(Bitmap pBitmap) {
         bitmap = pBitmap;
         imageView.setImageBitmap(bitmap);
+    }
+
+    @Override
+    public void requestWritePermission() {
+        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10);
     }
 
     @Override
@@ -174,10 +182,6 @@ public class EditorPictureFragment extends Fragment implements EditorPictureCont
         return picturePath;
     }
 
-    @Override
-    public Fragment getViewFragment() {
-        return this;
-    }
 
     @Override
     public CropResult getCropResult() {
@@ -187,6 +191,11 @@ public class EditorPictureFragment extends Fragment implements EditorPictureCont
     @Override
     public Bitmap getBitmap() {
         return bitmap;
+    }
+
+    @Override
+    public boolean areWritePermissionGranted() {
+        return ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
 

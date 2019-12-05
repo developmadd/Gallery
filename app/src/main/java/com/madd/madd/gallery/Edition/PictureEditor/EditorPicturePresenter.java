@@ -1,20 +1,15 @@
 package com.madd.madd.gallery.Edition.PictureEditor;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.os.Build;
 import android.os.Environment;
-import android.support.v4.content.ContextCompat;
 
 import com.fenchtose.nocropper.CropInfo;
 import com.fenchtose.nocropper.CropResult;
 import com.fenchtose.nocropper.ScaledCropper;
-import com.madd.madd.gallery.Edition.PictureEditor.EditorPictureContract;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -25,14 +20,13 @@ import java.util.UUID;
 
 public class EditorPicturePresenter implements EditorPictureContract.Presenter {
 
-    private Context context;
     private EditorPictureContract.View view;
 
     private int rotationCount = 0;
     private Bitmap originalBitmap;
 
-    public EditorPicturePresenter( Context context) {
-        this.context = context;
+    public EditorPicturePresenter( ) {
+
     }
 
     @Override
@@ -42,14 +36,14 @@ public class EditorPicturePresenter implements EditorPictureContract.Presenter {
 
 
 
+
     @Override
     public void finishEdition() {
         if( view != null ) {
 
-            int permissionCheckRead = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            if (permissionCheckRead != PackageManager.PERMISSION_GRANTED) {
+            if ( !view.areWritePermissionGranted() ) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    view.getViewFragment().requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10);
+                    view.requestWritePermission();
                 }
             } else {
                 executePictureEdition();
@@ -58,14 +52,16 @@ public class EditorPicturePresenter implements EditorPictureContract.Presenter {
         }
     }
 
+
     @Override
-    public void onPermissionsResult(int[] grantResults) {
-        if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+    public void setWritePermissions(boolean grantedPermissions) {
+        if ( grantedPermissions ) {
             executePictureEdition();
         } else {
             view.showPermissionError();
         }
     }
+
 
     @Override
     public void loadPicture() {

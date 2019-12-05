@@ -1,4 +1,4 @@
-package com.madd.madd.gallery.UserGallery.Gallery.Presenter;
+package com.madd.madd.gallery.UserGallery.Gallery;
 
 import android.content.ContentResolver;
 
@@ -31,13 +31,24 @@ public class AlbumPresenterTest {
 
     @Before
     public void setUp() {
-        //mockedModel = mock(AlbumContract.Model.class);
-        //mockedView = mock(AlbumContract.View.class);
+        mockedModel = mock(AlbumContract.Model.class);
+        mockedView = mock(AlbumContract.View.class);
 
-        //mockedModel.getPictureList();
-        //presenter = new AlbumPresenter(mockedModel);
+
+        presenter = new AlbumPresenter(mockedModel);
     }
 
+    /*
+
+        Tests:
+        1: Show empty list
+        2: Show not empty list
+        3: Select picture with single selection
+        4: Un-select picture with single selection
+        5: Select picture with multiple selection
+        6: Un-select picture with multiple selection
+
+     */
 
     // Show picture list
     /*@Test

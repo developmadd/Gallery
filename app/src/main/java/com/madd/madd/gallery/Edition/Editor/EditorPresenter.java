@@ -41,25 +41,18 @@ public class EditorPresenter implements EditorContract.Presenter {
 
     @Override
     public void editPicture(String editedPath) {
+        int selectedPicture = view.getSelectedPicture();
+
         if(editedPath.isEmpty()){
-            deletePicture();
+            view.getPictureList().remove(selectedPicture);
+            this.showPictureList();
         } else {
-            refreshPicture(editedPath);
+            view.getPictureList().set(selectedPicture, editedPath);
+            view.refreshPicture(selectedPicture);
         }
     }
 
 
-    private void deletePicture() {
-        int selectedPicture = view.getSelectedPicture();
-        view.getPictureList().remove(selectedPicture);
-        showPictureList();
-    }
-
-    private void refreshPicture(String path) {
-        int selectedPicture = view.getSelectedPicture();
-        view.getPictureList().set(selectedPicture, path);
-        view.refreshPicture(selectedPicture);
-    }
 
 
     @Override

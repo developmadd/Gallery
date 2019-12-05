@@ -84,6 +84,9 @@ public class AlbumFragment extends Fragment implements AlbumContract.View {
 
         loadView();
 
+
+        presenter.setView(this);
+        presenter.requestPictureList(albumName);
         return v;
     }
 
@@ -97,7 +100,6 @@ public class AlbumFragment extends Fragment implements AlbumContract.View {
     public void onResume() {
         super.onResume();
         presenter.setView(this);
-        presenter.requestPictureList(albumName);
     }
 
     private void loadView(){

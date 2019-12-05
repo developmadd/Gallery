@@ -1,17 +1,13 @@
 package com.madd.madd.gallery.UserGallery.Gallery;
 
-import android.content.Context;
 import android.os.Build;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
@@ -59,18 +55,40 @@ public class GalleryPresenterTest {
     @Test
     public void requestAlbumListWithPermissionsAndEmptyAlbumList() {
         when(mockedView.areReadPermissionGranted()).thenReturn(true);
-        presenter.requestAlbumList();
+
         doAnswer(invocation -> {
             ((GalleryContract.Model.AlbumListRequest)invocation.getArguments()[0]).onError("");
             return null;
         }).when(mockedModel).getAlbumList(any(GalleryContract.Model.AlbumListRequest.class));
 
-
-
+        presenter.requestAlbumList();
         verify(mockedView).showEmptyListError();
     }
 
     @Test
+    public void requestAlbumListWithPermissions() {
+        when(mockedView.areReadPermissionGranted()).thenReturn(true);
+
+        List<Album> pictureList = new ArrayList<>();
+        doAnswer(invocation -> {
+            ((GalleryContract.Model.AlbumListRequest)invocation.getArguments()[0]).onSuccess(pictureList);
+            return null;
+        }).when(mockedModel).getAlbumList(any(GalleryContract.Model.AlbumListRequest.class));
+
+        presenter.requestAlbumList();
+        verify(mockedView).showAlbumList(pictureList);
+    }
+
+    @Test
     public void updateSelectedPictureList() {
+        List<String> currentPictureList = new ArrayList<>();
+        List<String> updatedPictureList = new ArrayList<>();
+        updatedPictureList.add("1");
+        updatedPictureList.add("2");
+        updatedPictureList.add("3");
+        when(mockedView.getSelectedPictureList()).thenReturn(currentPictureList);
+        presenter.updateSelectedPictureList(updatedPictureList);
+
+        verify(mockedView).showSelectedPictureCounter(updatedPictureList.size());
     }
 }

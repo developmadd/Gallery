@@ -13,6 +13,7 @@ public interface EditorPictureContract {
 
         void loadPictureBitmap(Bitmap bitmap);
 
+        void requestWritePermission();
         void showLoadProgress();
         void hideLoadProgress();
         void showPermissionError();
@@ -21,16 +22,16 @@ public interface EditorPictureContract {
         void returnSelectedPictureList(String editedPath);
 
         String getPicturePath();
-        Fragment getViewFragment();
         CropResult getCropResult();
         Bitmap getBitmap();
+        boolean areWritePermissionGranted();
     }
 
     interface Presenter {
 
         void setView(EditorPictureContract.View view);
 
-        void onPermissionsResult(int[] grantResults);
+        void setWritePermissions(boolean grantedPermissions);
         void loadPicture();
 
         void deletePicture();

@@ -1,6 +1,5 @@
 package com.madd.madd.gallery.Edition.PictureEditor;
 
-import android.content.Context;
 
 import dagger.Module;
 import dagger.Provides;
@@ -9,8 +8,8 @@ import dagger.Provides;
 public class EditorPictureModule {
 
     @Provides
-    EditorPictureContract.Presenter provideEditorPicturePresent(Context context){
-        return new EditorPicturePresenter(context);
+    EditorPictureContract.Presenter provideEditorPicturePresent(){
+        return new EditorPicturePresenter();
     }
 
 
