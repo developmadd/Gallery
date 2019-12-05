@@ -1,7 +1,5 @@
 package com.madd.madd.gallery.UserGallery.Gallery;
 
-import android.support.v4.app.Fragment;
-
 import java.util.List;
 
 public interface GalleryContract {
@@ -11,6 +9,7 @@ public interface GalleryContract {
         void showPermissionError();
         void hidePermissionError();
 
+        void requestReadPermission();
         void showAlbumList(List<Album> albumList);
         void showEmptyListError();
 
@@ -23,14 +22,14 @@ public interface GalleryContract {
 
         List<String> getSelectedPictureList();
         boolean getMultipleSelection();
-        Fragment getViewFragment();
+        boolean areReadPermissionGranted();
     }
 
     interface Presenter {
         void setView(GalleryContract.View view);
 
         void requestAlbumList();
-        void onPermissionsResult(int[] grantResults);
+        void setReadPermissions(boolean grantedPermissions);
 
         void openAlbum(String albumName);
         void updateSelectedPictureList(List<String> updatedSelectedPictureList);

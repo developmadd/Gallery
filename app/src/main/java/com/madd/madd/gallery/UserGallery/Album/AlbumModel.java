@@ -22,14 +22,7 @@ public class AlbumModel implements AlbumContract.Model {
 
     @Override
     public void getPictureList( String albumName, PictureListRequest pictureListRequest) {
-        if( albumName.equals("this_album_exists")){
-            List<String> imageList = new ArrayList<>();
-            imageList.add("0");
-            imageList.add("1");
-            imageList.add("2");
-            pictureListRequest.onSuccess(imageList);
-            return;
-        }
+
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         String [] projection = {MediaStore.Images.Media.DATA};
         String selection = MediaStore.Images.Media.BUCKET_DISPLAY_NAME+" =?";

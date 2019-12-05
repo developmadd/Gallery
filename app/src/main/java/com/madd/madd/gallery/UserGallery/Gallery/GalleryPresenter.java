@@ -16,13 +16,10 @@ public class GalleryPresenter implements GalleryContract.Presenter {
     private GalleryContract.View view;
     private GalleryContract.Model model;
 
-    private Context context;
 
 
-    GalleryPresenter(GalleryContract.Model model,
-                     Context context) {
+    GalleryPresenter(GalleryContract.Model model) {
         this.model = model;
-        this.context = context;
     }
 
     @Override
@@ -32,29 +29,32 @@ public class GalleryPresenter implements GalleryContract.Presenter {
 
 
 
-    @Override
-    public void onPermissionsResult(int[] grantResults) {
-        if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-            getAlbumList();
-        } else {
-            view.showPermissionError();
-        }
-    }
 
     @Override
     public void requestAlbumList() {
 
         if( view != null ) {
-            int permissionCheckRead = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE);
-            if (permissionCheckRead != PackageManager.PERMISSION_GRANTED) {
+            if ( !view.areReadPermissionGranted() ) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    view.getViewFragment().requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 10);
+                    view.requestReadPermission();
                 }
+                view.showPermissionError();
             } else {
                 view.hidePermissionError();
                 view.showLoadingProgress();
                 getAlbumList();
             }
+        }
+    }
+
+    @Override
+    public void setReadPermissions(boolean grantedPermissions) {
+        if( grantedPermissions ){
+            view.hidePermissionError();
+            view.showLoadingProgress();
+            getAlbumList();
+        } else {
+            view.showPermissionError();
         }
     }
 
@@ -82,7 +82,7 @@ public class GalleryPresenter implements GalleryContract.Presenter {
 
     @Override
     public void openAlbum(String albumName) {
-        if( view != null ){
+        if( view != null ) {
             view.openAlbum(view.getSelectedPictureList(),view.getMultipleSelection(),albumName);
         }
     }

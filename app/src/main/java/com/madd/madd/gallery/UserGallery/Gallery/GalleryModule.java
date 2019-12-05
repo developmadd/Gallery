@@ -10,9 +10,8 @@ import dagger.Provides;
 public class GalleryModule {
 
     @Provides
-    GalleryContract.Presenter provideGalleryPresenter(GalleryContract.Model model,
-                                                      Context context ){
-        return new GalleryPresenter(model,context);
+    GalleryContract.Presenter provideGalleryPresenter(GalleryContract.Model model){
+        return new GalleryPresenter(model);
     }
 
     @Provides

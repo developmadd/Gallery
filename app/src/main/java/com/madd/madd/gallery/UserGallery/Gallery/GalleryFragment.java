@@ -88,6 +88,8 @@ public class GalleryFragment extends Fragment implements GalleryContract.View {
 
         loadView();
 
+        presenter.setView(this);
+        presenter.requestAlbumList();
         return v;
     }
 
@@ -96,14 +98,14 @@ public class GalleryFragment extends Fragment implements GalleryContract.View {
     public void onResume() {
         super.onResume();
         presenter.setView(this);
-        presenter.requestAlbumList();
     }
 
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        presenter.onPermissionsResult(grantResults);
+        boolean grantedPermissions =  (grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED);
+        presenter.setReadPermissions(grantedPermissions);
     }
 
 
@@ -163,6 +165,11 @@ public class GalleryFragment extends Fragment implements GalleryContract.View {
     }
 
     @Override
+    public void requestReadPermission() {
+        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 10);
+    }
+
+    @Override
     public void showLoadingProgress() {
         progressBar.setVisibility(View.VISIBLE);
     }
@@ -211,9 +218,10 @@ public class GalleryFragment extends Fragment implements GalleryContract.View {
         return multipleSelection;
     }
 
+
     @Override
-    public Fragment getViewFragment() {
-        return this;
+    public boolean areReadPermissionGranted() {
+        return ContextCompat.checkSelfPermission(Objects.requireNonNull(getContext()), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
 
 
