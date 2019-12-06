@@ -15,7 +15,7 @@ The MainActivity contains an example code for the Gallery and Editor project con
 * Butterknife
 * Cropper - NoCropper - (https://github.com/jayrambhia/CropperNoCropper)
 * MVP
-* Mockito for Presenter testing
+* Mockito
 
 ## Authors
 
