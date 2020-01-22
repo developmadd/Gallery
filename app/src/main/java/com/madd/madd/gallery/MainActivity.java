@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.madd.madd.gallery.Edition.EditorActivity;
 import com.madd.madd.gallery.UserGallery.GalleryActivity;
-import com.madd.madd.gallery.Root.App;
+import com.madd.madd.gallery.DI.App;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, GalleryActivity.class);
         intent.putExtra("multiple_selection",checkBox.isChecked());
         startActivityForResult(intent,1);
+
     }
 
     private void openEditor(){

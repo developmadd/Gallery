@@ -1,20 +1,13 @@
 package com.madd.madd.gallery.UserGallery.Gallery;
 
 import android.content.ContentResolver;
-import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-import com.madd.madd.gallery.Root.App;
-import com.madd.madd.gallery.UserGallery.Gallery.GalleryContract;
-import com.madd.madd.gallery.UserGallery.Gallery.Album;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 public class GalleryModel implements GalleryContract.Model {
 
@@ -30,11 +23,20 @@ public class GalleryModel implements GalleryContract.Model {
         List<Album> albumList = new ArrayList<>();
 
         List<String> bucketsLabel = new ArrayList<>();
+
         Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
-        String [] projection = {MediaStore.Images.Media.BUCKET_DISPLAY_NAME, MediaStore.Images.Media.DATA};
+        String[] projection = {
+                MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
+                MediaStore.Images.Media.DATA
+        };
         String orderBy = MediaStore.Images.Media.DATE_ADDED + " DESC";
 
-        Cursor cursor = contentResolver.query(uri, projection, null, null, orderBy);
+        Cursor cursor = contentResolver.query(
+                uri,
+                projection,
+                null,
+                null,
+                orderBy);
         if(cursor != null){
             File file;
             while (cursor.moveToNext()){

@@ -1,4 +1,4 @@
-package com.madd.madd.gallery.Root;
+package com.madd.madd.gallery.DI;
 
 
 import com.madd.madd.gallery.Edition.Editor.EditorFragment;

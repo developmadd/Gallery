@@ -1,4 +1,4 @@
-package com.madd.madd.gallery.Root;
+package com.madd.madd.gallery.DI;
 
 import android.app.Application;
 

@@ -20,7 +20,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
 import com.madd.madd.gallery.Edition.PictureEditor.EditorPictureFragment;
 import com.madd.madd.gallery.R;
-import com.madd.madd.gallery.Root.App;
+import com.madd.madd.gallery.DI.App;
 
 import java.util.List;
 import java.util.Objects;

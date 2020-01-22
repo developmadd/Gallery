@@ -2,10 +2,7 @@ package com.madd.madd.gallery.UserGallery.Gallery;
 
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.ContentResolver;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,24 +10,17 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.madd.madd.gallery.Root.App;
+import com.madd.madd.gallery.DI.App;
 import com.madd.madd.gallery.UserGallery.Album.AlbumFragment;
-import com.madd.madd.gallery.UserGallery.Gallery.GalleryContract;
-import com.madd.madd.gallery.UserGallery.Gallery.Album;
 import com.madd.madd.gallery.UserGallery.Album.AlbumPresenter;
-import com.madd.madd.gallery.UserGallery.Gallery.GalleryPresenter;
 import com.madd.madd.gallery.R;
-import com.madd.madd.gallery.UserGallery.Gallery.AlbumAdapter;
 
 
 import java.util.ArrayList;

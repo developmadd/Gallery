@@ -4,7 +4,6 @@ package com.madd.madd.gallery.Edition.PictureEditor;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -19,10 +18,8 @@ import android.widget.Toast;
 
 import com.fenchtose.nocropper.CropResult;
 import com.fenchtose.nocropper.CropperView;
-import com.madd.madd.gallery.Edition.PictureEditor.EditorPictureContract;
-import com.madd.madd.gallery.Edition.PictureEditor.EditorPicturePresenter;
 import com.madd.madd.gallery.R;
-import com.madd.madd.gallery.Root.App;
+import com.madd.madd.gallery.DI.App;
 
 import java.util.Objects;
 
