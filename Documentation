@@ -1,0 +1,34 @@
+
+Content Provider:
+El content provider es un administrador que da acceso a datos de otras aplicaciones, por ejemplo, fotografias de galeria, contactos del teledono.
+Es necesario conceder permisos para poder acceder a dichos datos. Para poder acceder a determinada información se requiere crear un objeto de tipo
+contentResolver, y utilizando su metodo query, al cual se envian parametros que establecen detalles de los datos que se desean
+obtener:
+- Uri: Tipo de datos a obtener, Ej Contactos
+- Projection: Datos particulares sobre los que se tiene interes de obtener, tambien son considerados columnas. Ej: Nombre, Id, Numero telefonico, Email
+- Selection, Selection Args: Criterios con los que los datos deben de cumplir para ser obtenidos.
+- Sort Order: Criterio de ordenamiento de los datos obtenidos.
+
+El query es guardado en un objeto de tipo Cursor, el cual es utilizado para desplazarse entre los resultados obtenidos y acceder a alguno en particular, mediante
+un proceso similar al de un JSON, donde las ramas estan definidas por los criterios de proyeccion establecidos, en dado caso de no haber establecido proyeccion
+se regresan toda la informacion disponible.
+
+
+MVP:
+Es un patron de diseño empleado para estructurar proyectos basado en la division de responsabilidades por componentes(o capas) y la independencia de dichos componentes
+entre ellos, logrando sistemas desacoplados y abstractos que facilitan su escala y mantenimiento. MVP significa Model-View-Presenter, las cuales representan cada capa
+y tienen una responsabilidad
+- Model: Capa de datos, responsable de guardar, actualizar, leer o eliminar informacion del sistema. En si es el responsable de administrar la informacion
+ que el sistema empleará sin importar si esto implica conectarse a REST APIs, escribir en bases de datos locales, sistemas de archivos, o cualquier tipo de memoria
+ que convenga, las demás capas no tienen por que saber ni preocuparse sobre la administracion de la informacion, para ello solo basta hacer peticiones a la capa de
+ modelo.
+- View: Capa de vista, responsable de la interaccion con el usuario, en esta se administra la parte grafica del sistema como diseño o animaciones. Sus tareas son muy
+ limitadas como unicamente obtener datos del usuario mediante los campos de un formulario o mostrar resultados listas o paginas de detalle. La vista no sabe
+ cual es el proposito de un formulario ni donde se guardaran dichos datos, esta unicamente tiene elementos capaz de adquirir o mostrar datos al usuario y que
+ estos luzcan bien en cualquier tipo de dispositivo.
+- Presenter: Capa de presentador, responsable de administrar la logica de cada vista siendo un puente entre la vista y el modelo. Esta capa administra los eventos
+ que un usuario ejecuta en la vista (realizar un registro, acceder al detalle de un elemento etc) y realiza la peticion pertinente el modelo esperando una respuesta
+ una ves que llega una respuesta del modelo realiza la accion pertinente en la vista(mostrar la informacion requerida, mostrar un error etc).
+
+En MVP es requerido utilizar interfaces denominados Contratos que establecen los metodos que cada capa debe ser capaz de realizar y que dotan de abstraccion dado que
+clase que implemente dichos contratos seran capaces de ser usados como Modelo Vista o Presentador dependiendo.

@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+
+
         buttonEditor.setOnClickListener(view -> {
             if( !picturePathList.isEmpty() ) {
                 openEditor();
