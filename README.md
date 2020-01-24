@@ -5,7 +5,7 @@ This is a public Android project that allows us to work with picture lists from 
 
 The MainActivity contains an example code for the Gallery and Editor project consumption.
 
-<img src="app/src/main/res/drawable/gallery1_.png" alt="drawing" width="200"/> <img src="app/src/main/res/drawable/gallery2_.png" alt="drawing" width="200"/> <img src="app/src/main/res/drawable/gallery3_.png" alt="drawing" width="200"/> <img src="app/src/main/res/drawable/gallery4_.png" alt="drawing" width="200"/> <img src="app/src/main/res/drawable/gallery5_.png" alt="drawing" width="200"/> <img src="app/src/main/res/drawable/Editor1_.png" alt="drawing" width="200"/> <img src="app/src/main/res/drawable/Editor2_.png" alt="drawing" width="200"/>
+<img src="app/src/main/res/drawable/gallery1_.png" alt="drawing" width="200"/> <img src="app/src/main/res/drawable/gallery2_.png" alt="drawing" width="200"/> <img src="app/src/main/res/drawable/gallery3_.png" alt="drawing" width="200"/> <img src="app/src/main/res/drawable/gallery4_.png" alt="drawing" width="200"/> <img src="app/src/main/res/drawable/gallery5_.png" alt="drawing" width="200"/> <img src="app/src/main/res/drawable/editor1_.png" alt="drawing" width="200"/> <img src="app/src/main/res/drawable/editor2_.png" alt="drawing" width="200"/>
 
 
 ## Used tools
