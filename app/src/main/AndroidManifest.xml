@@ -24,8 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserGallery.GalleryActivity" />
-        <activity android:name=".Edition.EditorActivity" />
+        <activity android:name=".UI.Activities.GalleryActivity" />
+        <activity android:name=".UI.Activities.EditorActivity" />
     </application>
 
 </manifest>

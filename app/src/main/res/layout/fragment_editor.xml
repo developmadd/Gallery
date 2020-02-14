@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Edition.Editor.EditorFragment"
+    tools:context=".UI.Fragments.GalleryEditor.GalleryEditorFragment"
     android:orientation="vertical">
 
 

@@ -2,10 +2,10 @@ package com.madd.madd.gallery.DI;
 
 import android.app.Application;
 
-import com.madd.madd.gallery.Edition.Editor.EditorModule;
-import com.madd.madd.gallery.Edition.PictureEditor.EditorPictureModule;
-import com.madd.madd.gallery.UserGallery.Album.AlbumModule;
-import com.madd.madd.gallery.UserGallery.Gallery.GalleryModule;
+import com.madd.madd.gallery.UI.Fragments.GalleryEditor.GalleryEditorModule;
+import com.madd.madd.gallery.UI.Fragments.PictureEditor.EditorPictureModule;
+import com.madd.madd.gallery.UI.Fragments.Album.AlbumModule;
+import com.madd.madd.gallery.UI.Fragments.Gallery.GalleryModule;
 
 
 public class App extends Application {
@@ -19,7 +19,7 @@ public class App extends Application {
                 .applicationModule(new ApplicationModule(this))
                 .galleryModule(new GalleryModule())
                 .albumModule(new AlbumModule())
-                .editorModule(new EditorModule())
+                .galleryEditorModule(new GalleryEditorModule())
                 .editorPictureModule(new EditorPictureModule())
                 .build();
     }

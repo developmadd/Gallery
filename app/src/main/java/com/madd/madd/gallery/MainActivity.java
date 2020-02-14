@@ -9,8 +9,8 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 
-import com.madd.madd.gallery.Edition.EditorActivity;
-import com.madd.madd.gallery.UserGallery.GalleryActivity;
+import com.madd.madd.gallery.UI.Activities.EditorActivity;
+import com.madd.madd.gallery.UI.Activities.GalleryActivity;
 import com.madd.madd.gallery.DI.App;
 
 import java.util.ArrayList;
